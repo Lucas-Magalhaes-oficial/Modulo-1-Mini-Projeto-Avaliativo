@@ -16,3 +16,15 @@ print("\nPrimeiras linhas para conferência das colunas:")
 print(df.head(2))
 print("\nTipos de dados detectados pelo Pandas:")
 print(df.dtypes)
+
+# Diagnóstico de valores nulos para entender quais colunas precisam de atenção
+print("\nValores nulos identificados por coluna:")
+print(df.isna().sum())
+
+# Verificação e remoção de registros duplicados
+total_duplicados = df.duplicated().sum()
+print(f"\nLinhas duplicadas encontradas: {total_duplicados}")
+
+if total_duplicados > 0:
+    df = df.drop_duplicates()
+    print("Registros duplicados removidos com sucesso.")

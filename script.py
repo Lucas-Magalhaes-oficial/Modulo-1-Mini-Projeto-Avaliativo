@@ -95,3 +95,22 @@ if 'CL_FHL' in df.columns:
     print("\n--- Quartis (Percentis) ---")
     print(df['CL_FHL'].quantile([0.25, 0.5, 0.75]))
     print("==============================================\n")
+
+    print("==============================================")
+    print("  ANÁLISE DE AGRUPAMENTOS E PADRÕES DE VENDA  ")
+    print("==============================================")
+
+    # Agrupamento 1: Distribuição de compras por Categoria de Produto e Gênero do Cliente
+    if 'PR_CAT' in df.columns and 'CL_GENERO' in df.columns:
+        agrup_categoria_genero = df.groupby(['PR_CAT', 'CL_GENERO']).size().unstack(fill_value=0)
+        print("\n--- Total de Itens Vendidos por Categoria e Gênero ---")
+        print(agrup_categoria_genero)
+
+    # Agrupamento 2: Preferência de Segmento de Cliente por Categoria
+    if 'CL_SEG' in df.columns and 'PR_CAT' in df.columns:
+        agrup_segmento = df.groupby(['CL_SEG', 'PR_CAT']).size().unstack(fill_value=0)
+        print("\n--- Volume de Vendas por Segmento de Cliente e Categoria ---")
+        print(agrup_segmento)
+        
+    print("==============================================\n")
+    print("Análise concluída com sucesso!")

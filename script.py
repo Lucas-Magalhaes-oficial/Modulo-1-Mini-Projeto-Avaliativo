@@ -39,8 +39,7 @@ if 'PR_CAT' in df.columns:
     df['PR_CAT'] = df['PR_CAT'].fillna('Sem Categoria')
     print("Valores ausentes em 'PR_CAT' preenchidos com 'Sem Categoria'.")
 
-# Validação condicional de dimensões físicas (Critério 4 da avaliação)
-# Como a base atual não possui colunas físicas (ex: peso/altura), criamos a checagem
+# Validação condicional de dimensões físicas 
 colunas_fisicas = ['PESO', 'ALTURA', 'LARGURA', 'PR_PESO']
 dimensoes_encontradas = [col for col in colunas_fisicas if col in df.columns]
 
@@ -70,6 +69,6 @@ if 'CO_ID' in df.columns:
     linhas_removidas = antes_validacao - df.shape[0]
     print(f"Validação de 'CO_ID' concluída. Registros inconsistentes removidos: {linhas_removidas}")
 
-# Exportação da base limpa intermediária (Exigência da Sprint 6)
+# Exportação da base limpa intermediária
 df.to_csv('df_limpo.csv', sep=';', index=False, encoding='utf-8')
 print("Base intermediária 'df_limpo.csv' exportada com sucesso para o repositório.")

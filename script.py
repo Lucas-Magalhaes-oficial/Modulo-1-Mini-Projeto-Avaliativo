@@ -72,3 +72,26 @@ if 'CO_ID' in df.columns:
 # Exportação da base limpa intermediária
 df.to_csv('df_limpo.csv', sep=';', index=False, encoding='utf-8')
 print("Base intermediária 'df_limpo.csv' exportada com sucesso para o repositório.")
+
+if 'CL_FHL' in df.columns:
+    # Força a conversão da coluna de filhos para tipo numérico, tratando erros
+    df['CL_FHL'] = pd.to_numeric(df['CL_FHL'], errors='coerce').fillna(0).astype(int)
+    
+    print("\n==============================================")
+    print("  ESTATÍSTICA DESCRITIVA - NÚMERO DE FILHOS")
+    print("==============================================")
+    
+    # Cálculos manuais detalhados
+    print(f"Média de filhos:         {df['CL_FHL'].mean():.2f}")
+    print(f"Mediana de filhos:       {df['CL_FHL'].median()}")
+    print(f"Desvio Padrão de filhos: {df['CL_FHL'].std():.2f}")
+    
+    # A moda no pandas retorna uma Series (pois pode haver empate), pegamos o primeiro valor
+    print(f"Moda de filhos:          {df['CL_FHL'].mode()[0]}")
+    print(f"Valor Máximo:            {df['CL_FHL'].max()}")
+    print(f"Valor Mínimo:            {df['CL_FHL'].min()}")
+    print(f"Contagem total (linhas): {df['CL_FHL'].count()}")
+    
+    print("\n--- Quartis (Percentis) ---")
+    print(df['CL_FHL'].quantile([0.25, 0.5, 0.75]))
+    print("==============================================\n")
